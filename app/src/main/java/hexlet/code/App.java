@@ -8,7 +8,7 @@ import picocli.CommandLine.Parameters;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", version = "gendiff 1.0", description = "Compares two configuration files and shows a difference.", mixinStandardHelpOptions = true)
-public class App implements Runnable {
+public class App implements Callable<Integer> {
     @Parameters(paramLabel = "filepath1", description = "path to first file")
     String filePath1;
 
@@ -19,8 +19,9 @@ public class App implements Runnable {
     String format;
 
     @Override
-    public void run() {
+    public Integer call() {
         System.out.println("Hello, world!");
+        return 0;
     }
 
     public static void main(String[] args) {
