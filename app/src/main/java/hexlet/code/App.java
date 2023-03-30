@@ -9,8 +9,9 @@ import picocli.CommandLine.Parameters;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
 
 @Command(name = "gendiff", version = "gendiff 1.0", description = "Compares two configuration files and shows a difference.", mixinStandardHelpOptions = true)
 public class App implements Callable<Integer> {
@@ -28,10 +29,28 @@ public class App implements Callable<Integer> {
         String file1Data = Files.readString(filePath1);
         String file2Data = Files.readString(filePath2);
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> json1 = mapper.readValue(file1Data, Map.class);
-        Map<String, String> json2 = mapper.readValue(file2Data, Map.class);
-        System.out.println(json1);
-        System.out.println(json2);
+        Map<String, ?> json1 = mapper.readValue(file1Data, Map.class);
+        Map<String, ?> json2 = mapper.readValue(file2Data, Map.class);
+        Set<String> keys = new HashSet<>();
+        keys.addAll(json1.keySet());
+        keys.addAll(json2.keySet());
+        List<String> sortedKeys = keys.stream().sorted().collect(Collectors.toList());
+        List<String> diff = new ArrayList<>();
+        diff.add("{");
+        sortedKeys.forEach(key -> {
+            if (!json1.containsKey(key)) {
+                diff.add(String.format("  + %s: %s", key, json2.get(key)));
+            } else if (!json2.containsKey(key)) {
+                diff.add(String.format("  - %s: %s", key, json1.get(key)));
+            } else if (json1.get(key).equals(json2.get(key))) {
+                diff.add(String.format("    %s: %s", key, json1.get(key)));
+            } else {
+                diff.add(String.format("  - %s: %s", key, json1.get(key)));
+                diff.add(String.format("  + %s: %s", key, json2.get(key)));
+            }
+        });
+        diff.add("}");
+        System.out.println(diff.stream().collect(Collectors.joining("\n")));
         return 0;
     }
 
