@@ -7,6 +7,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -25,32 +26,25 @@ public class App implements Callable<Integer> {
     String format;
 
     @Override
+    @SuppressWarnings("unchecked")
     public Integer call() throws Exception {
-        String file1Data = Files.readString(filePath1);
-        String file2Data = Files.readString(filePath2);
+        String file1Data;
+        String file2Data;
+        try {
+            file1Data = Files.readString(filePath1);
+            file2Data = Files.readString(filePath2);
+        } catch (IOException ex) {
+            System.out.println("File " + ex.getMessage() + " does not exist.");
+            return 1;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return 1;
+        }
+
         ObjectMapper mapper = new ObjectMapper();
         Map<String, ?> json1 = mapper.readValue(file1Data, Map.class);
         Map<String, ?> json2 = mapper.readValue(file2Data, Map.class);
-        Set<String> keys = new HashSet<>();
-        keys.addAll(json1.keySet());
-        keys.addAll(json2.keySet());
-        List<String> sortedKeys = keys.stream().sorted().collect(Collectors.toList());
-        List<String> diff = new ArrayList<>();
-        diff.add("{");
-        sortedKeys.forEach(key -> {
-            if (!json1.containsKey(key)) {
-                diff.add(String.format("  + %s: %s", key, json2.get(key)));
-            } else if (!json2.containsKey(key)) {
-                diff.add(String.format("  - %s: %s", key, json1.get(key)));
-            } else if (json1.get(key).equals(json2.get(key))) {
-                diff.add(String.format("    %s: %s", key, json1.get(key)));
-            } else {
-                diff.add(String.format("  - %s: %s", key, json1.get(key)));
-                diff.add(String.format("  + %s: %s", key, json2.get(key)));
-            }
-        });
-        diff.add("}");
-        System.out.println(diff.stream().collect(Collectors.joining("\n")));
+        System.out.println(Differ.generate(json1, json2));
         return 0;
     }
 
