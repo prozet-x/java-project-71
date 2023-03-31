@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -26,7 +27,7 @@ public class App implements Callable<Integer> {
     String format;
 
     @Override
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     public Integer call() throws Exception {
         String file1Data;
         String file2Data;
@@ -42,8 +43,8 @@ public class App implements Callable<Integer> {
         }
 
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, ?> json1 = mapper.readValue(file1Data, Map.class);
-        Map<String, ?> json2 = mapper.readValue(file2Data, Map.class);
+        Map<String, ?> json1 = mapper.readValue(file1Data, new TypeReference<Map<String, ?>>(){});
+        Map<String, ?> json2 = mapper.readValue(file2Data, new TypeReference<Map<String, ?>>(){});
         System.out.println(Differ.generate(json1, json2));
         return 0;
     }
