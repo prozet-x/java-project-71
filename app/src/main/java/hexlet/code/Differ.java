@@ -2,15 +2,18 @@ package hexlet.code;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.ArrayList;
 
 public class Differ {
     public static @NotNull String generate(@NotNull Map<String, ?> data1, @NotNull Map<String, ?> data2) {
         Set<String> keys = new HashSet<>();
         keys.addAll(data1.keySet());
         keys.addAll(data2.keySet());
-        List<String> sortedKeys = keys.stream().sorted().toList();
+        var sortedKeys = keys.stream().sorted().toList();
         List<String> diff = new ArrayList<>();
         diff.add("{");
         sortedKeys.forEach(key -> {

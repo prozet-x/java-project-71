@@ -6,16 +6,17 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
-
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
 
-@Command(name = "gendiff", version = "gendiff 1.0", description = "Compares two configuration files and shows a difference.", mixinStandardHelpOptions = true)
+@Command(
+        name = "gendiff",
+        version = "gendiff 1.0",
+        description = "Compares two configuration files and shows a difference.",
+        mixinStandardHelpOptions = true)
 public class App implements Callable<Integer> {
     @Parameters(paramLabel = "filepath1", description = "path to first file")
     Path filePath1;
@@ -23,7 +24,11 @@ public class App implements Callable<Integer> {
     @Parameters(paramLabel = "filepath2", description = "path to second file")
     Path filePath2;
 
-    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: ${DEFAULT-VALUE}]", defaultValue = "stylish")
+    @Option(
+            names = {"-f", "--format"},
+            paramLabel = "format",
+            description = "output format [default: ${DEFAULT-VALUE}]",
+            defaultValue = "stylish")
     String format;
 
     @Override
@@ -43,8 +48,8 @@ public class App implements Callable<Integer> {
         }
 
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, ?> json1 = mapper.readValue(file1Data, new TypeReference<Map<String, ?>>(){});
-        Map<String, ?> json2 = mapper.readValue(file2Data, new TypeReference<Map<String, ?>>(){});
+        Map<String, ?> json1 = mapper.readValue(file1Data, new TypeReference<Map<String, ?>>() { });
+        Map<String, ?> json2 = mapper.readValue(file2Data, new TypeReference<Map<String, ?>>() { });
         System.out.println(Differ.generate(json1, json2));
         return 0;
     }
