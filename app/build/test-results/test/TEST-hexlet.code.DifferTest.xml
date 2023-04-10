@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="hexlet.code.DifferTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-04-10T16:55:59" hostname="ubuntu" time="0.201">
+<testsuite name="hexlet.code.DifferTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-04-10T17:03:31" hostname="ubuntu" time="0.165">
   <properties/>
-  <testcase name="testS()" classname="hexlet.code.DifferTest" time="0.201"/>
+  <testcase name="testS()" classname="hexlet.code.DifferTest" time="0.165"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
