@@ -40,7 +40,7 @@ class DifferTest {
         Map<String, ?> json1;
         Map<String, ?> json2;
         try {
-            json1 = mapper.readValue(file1Data, new TypeReference<Map<String, ?>>() {});
+            json1 = mapper.readValue(file1Data, new TypeReference<Map<String, ?>>() { });
             json2 = mapper.readValue(file2Data, new TypeReference<Map<String, ?>>() { });
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
