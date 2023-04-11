@@ -7,4 +7,4 @@ build:
 	make -C app build
 	
 report:
-	make -C app jacocoTestReport
+	make -C app report
