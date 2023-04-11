@@ -5,3 +5,6 @@ run-dist:
 
 build:
 	gradle build
+	
+report:
+	gradle jacocoTestCoverageVerification
