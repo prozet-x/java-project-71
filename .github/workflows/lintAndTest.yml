@@ -1,11 +1,13 @@
-name: lintAndTest
+name: Java CI
 
-on: [push]
+on:
+  - push
+  - pull_request
 
 jobs:
   build:
     runs-on: ubuntu-latest
-        
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -13,17 +15,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build with Gradle
+      - name: Build
         run: make build
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
-          build-root-directory: app
       - name: Publish code coverage
-        uses: paambaati/codeclimate-action@v3.0.0
+        uses: paambaati/codeclimate-action@v3.2.0
         env:
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-          JACOCO_SOURCE_PATH: src/main/java
+          CC_TEST_REPORTER_ID: "514b107c537155b86b5137a9e2ef5b3beb2a9aebf9f2338c3833129d2c8a5cda"
+          JACOCO_SOURCE_PATH: "${{github.workspace}}/app/src/main/java"
         with:
           coverageCommand: make report
-          coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+          debug: true
+          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
