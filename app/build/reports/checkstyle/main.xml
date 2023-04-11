@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<checkstyle version="8.45.1">
-<file name="/home/prozex/projects/java-project-71/app/src/main/java/hexlet/code/App.java">
+<checkstyle version="8.37">
+<file name="/home/dima/projects/java-project-71/app/src/main/java/hexlet/code/App.java">
 </file>
-<file name="/home/prozex/projects/java-project-71/app/src/main/java/hexlet/code/Differ.java">
+<file name="/home/dima/projects/java-project-71/app/src/main/java/hexlet/code/Differ.java">
 </file>
 </checkstyle>

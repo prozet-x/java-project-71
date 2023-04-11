@@ -7,4 +7,4 @@ build:
 	gradle build
 	
 report:
-	gradle jacocoTestCoverageVerification
+	gradle jacocoTestReport
