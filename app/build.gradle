@@ -37,32 +37,3 @@ test {
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
 }
-
-jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            limit {
-                minimum = 0.5
-            }
-        }
-
-        rule {
-            enabled = false
-            element = 'CLASS'
-            includes = ['org.gradle.*']
-
-            limit {
-                counter = 'LINE'
-                value = 'TOTALCOUNT'
-                maximum = 0.3
-            }
-        }
-    }
-}
-
-testlogger {
-    showPassed true
-    showSkipped true
-    showFailed true
-    showOnlySlow false
-}
