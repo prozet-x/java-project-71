@@ -30,20 +30,6 @@ public class App implements Callable<Integer> {
     @Override
     //@SuppressWarnings("unchecked")
     public Integer call() throws Exception {
-        /*String file1Data;
-        String file2Data;
-        try {
-            file1Data = Files.readString(filePath1);
-            file2Data = Files.readString(filePath2);
-        } catch (IOException ex) {
-            System.out.println("File " + ex.getMessage() + " does not exist.");
-            return 1;
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            return 1;
-        }*/
-
-        //ObjectMapper mapper = new ObjectMapper();
         Map<String, ?> data1 = Parser.parseFile(filePath1);
         Map<String, ?> data2 = Parser.parseFile(filePath2);
 
