@@ -28,7 +28,6 @@ public class App implements Callable<Integer> {
     String format;
 
     @Override
-    //@SuppressWarnings("unchecked")
     public Integer call() throws Exception {
         Map<String, ?> data1 = Parser.parseFile(filePath1);
         Map<String, ?> data2 = Parser.parseFile(filePath2);
