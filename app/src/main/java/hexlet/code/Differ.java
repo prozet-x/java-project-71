@@ -18,14 +18,21 @@ public class Differ {
         diff.add("{");
         sortedKeys.forEach(key -> {
             if (!data1.containsKey(key)) {
-                diff.add(String.format("  + %s: %s", key, data2.get(key)));
+                diff.add(String.format("  + %s: %s", key, data2.get(key) == null ? "null" : data2.get(key)));
             } else if (!data2.containsKey(key)) {
-                diff.add(String.format("  - %s: %s", key, data1.get(key)));
+                diff.add(String.format("  - %s: %s", key, data1.get(key) == null ? "null" : data1.get(key)));
+            } else if (data1.get(key) == null || data2.get(key) == null) {
+                if (data1.get(key) == null && data2.get(key) == null) {
+                    diff.add(String.format("    %s: %s", key, "null" ));
+                } else {
+                    diff.add(String.format("  - %s: %s", key, data1.get(key) == null ? "null" : data1.get(key)));
+                    diff.add(String.format("  + %s: %s", key, data2.get(key) == null ? "null" : data2.get(key)));
+                }
             } else if (data1.get(key).equals(data2.get(key))) {
-                diff.add(String.format("    %s: %s", key, data1.get(key)));
+                diff.add(String.format("    %s: %s", key, data1.get(key) == null ? "null" : data1.get(key)));
             } else {
-                diff.add(String.format("  - %s: %s", key, data1.get(key)));
-                diff.add(String.format("  + %s: %s", key, data2.get(key)));
+                diff.add(String.format("  - %s: %s", key, data1.get(key) == null ? "null" : data1.get(key)));
+                diff.add(String.format("  + %s: %s", key, data2.get(key) == null ? "null" : data2.get(key)));
             }
         });
         diff.add("}");
