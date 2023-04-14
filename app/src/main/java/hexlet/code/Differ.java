@@ -13,7 +13,9 @@ public class Differ {
         Set<String> keys = new HashSet<>();
         keys.addAll(data1.keySet());
         keys.addAll(data2.keySet());
+
         var sortedKeys = keys.stream().sorted().toList();
+
         List<Map<String, String>> diff = new ArrayList<>();
         sortedKeys.forEach(key -> {
             Map<String, String> newRecord;
@@ -21,26 +23,23 @@ public class Differ {
                 newRecord = Map.of("status", "add", "key", key, "value", getAsString(data2.get(key)));
             } else if (!data2.containsKey(key)) {
                 newRecord = Map.of("status", "del", "key", key, "value", getAsString(data1.get(key)));
-            } else if (data1.get(key) == null || data2.get(key) == null) {
-                if (data1.get(key) == null && data2.get(key) == null) {
-                    newRecord = Map.of("status", "const", "key", key, "value", "null");
+            } else {
+                Object value1 = data1.get(key);
+                Object value2 = data2.get(key);
+                if ((value1 == null && value2 == null)
+                        || (value1 != null && value1.equals(value2))) {
+                    newRecord = Map.of("status", "const", "key", key, "value", getAsString(value1));
                 } else {
                     newRecord = Map.of(
                             "status", "change",
                             "key", key,
-                            "value", getAsString(data2.get(key)),
-                            "oldValue", getAsString(data1.get(key)));
+                            "value", getAsString(value2),
+                            "oldValue", getAsString(value1));
                 }
-            } else if (data1.get(key).equals(data2.get(key))) {
-                newRecord = Map.of("status", "const", "key", key, "value", getAsString(data1.get(key)));
-            } else {
-                newRecord = Map.of("status", "change",
-                        "key", key,
-                        "value", getAsString(data2.get(key)),
-                        "oldValue", getAsString(data1.get(key)));
             }
             diff.add(newRecord);
         });
+
         return diff;
     }
 
