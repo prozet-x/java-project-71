@@ -9,12 +9,12 @@ import java.util.HashSet;
 import java.util.ArrayList;
 
 public class Differ {
-    public static @NotNull List generate(@NotNull Map<String, ?> data1, @NotNull Map<String, ?> data2) {
+    public static List<Map<String, String>> generate(@NotNull Map<String, ?> data1, @NotNull Map<String, ?> data2) {
         Set<String> keys = new HashSet<>();
         keys.addAll(data1.keySet());
         keys.addAll(data2.keySet());
         var sortedKeys = keys.stream().sorted().toList();
-        List<Map> diff = new ArrayList<>();
+        List<Map<String, String>> diff = new ArrayList<>();
         sortedKeys.forEach(key -> {
             Map<String, String> newRecord;
             if (!data1.containsKey(key)) {
@@ -36,8 +36,8 @@ public class Differ {
             } else {
                 newRecord = Map.of("status", "change",
                         "key", key,
-                        "value",
-                        getAsString(data2.get(key)), "oldValue", getAsString(data1.get(key)));
+                        "value", getAsString(data2.get(key)),
+                        "oldValue", getAsString(data1.get(key)));
             }
             diff.add(newRecord);
         });

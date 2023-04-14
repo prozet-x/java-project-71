@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Stylish implements Formatter {
     public String format(List<Map<String, String>> data) {
-        List rows = new ArrayList<>();
+        List<String> rows = new ArrayList<>();
         rows.add("{");
         data.forEach(str -> {
             if (str.get("status").equals("add")) {
