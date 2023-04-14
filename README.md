@@ -7,3 +7,5 @@
 [![asciicast](https://asciinema.org/a/azOZkZvmI4NZ7vgWCbCMqzzUL.svg)](https://asciinema.org/a/azOZkZvmI4NZ7vgWCbCMqzzUL)
 ### JSON/YAML differ:
 [![asciicast](https://asciinema.org/a/qOxMrnvVRYQvUVUZur1YjwgNL.svg)](https://asciinema.org/a/qOxMrnvVRYQvUVUZur1YjwgNL)
+### Stylish output:
+[![asciicast](https://asciinema.org/a/WcU6ftsMgSJeSSnPP2SC1uomu.svg)](https://asciinema.org/a/WcU6ftsMgSJeSSnPP2SC1uomu)
