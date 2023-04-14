@@ -1,11 +1,14 @@
 package hexlet.code;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import hexlet.code.formatters.Formatters;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 
 class DifferTest {
@@ -52,8 +55,15 @@ class DifferTest {
             return;
         }
 
-        assertEquals(f1f2diffData, Differ.generate(data1, data2));
-        assertEquals(f2f1diffData, Differ.generate(data2, data1));
-        assertEquals(f1f1diffData, Differ.generate(data1, data1));
+        List<Map<String, String>> diff;
+
+        diff = Differ.generate(data1, data2);
+        assertEquals(f1f2diffData, Formatters.getFormatter("stylish").format(diff));
+
+        diff = Differ.generate(data2, data1);
+        assertEquals(f2f1diffData, Formatters.getFormatter("stylish").format(diff));
+
+        diff = Differ.generate(data1, data1);
+        assertEquals(f1f1diffData, Formatters.getFormatter("stylish").format(diff));
     }
 }
