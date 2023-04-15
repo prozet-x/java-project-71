@@ -7,7 +7,10 @@ public class Formatters {
             "stylish", new Stylish(),
             "plain", new Plain()
             );
-    public static Formatter getFormatter(String formatterName) {
-        return map.get(formatterName);
+    public static Formatter getFormatter(String formatterName) throws Exception {
+        if (map.containsKey(formatterName)) {
+            return map.get(formatterName);
+        }
+        throw new Exception("Wrong formatter name. Only 'stylish', 'plain' or 'json' are available");
     }
 }

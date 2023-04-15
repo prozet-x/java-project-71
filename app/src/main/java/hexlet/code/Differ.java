@@ -1,7 +1,7 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Formatters;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 import java.util.Set;
 import java.util.Map;
@@ -9,10 +9,10 @@ import java.util.HashSet;
 import java.util.ArrayList;
 
 public class Differ {
-    public static List<Map<String, ?>> generate(
+    public static String generate(
             @NotNull Map<String, ?> data1,
-            @NotNull Map<String, ?> data2
-            /*,String formatterName*/) {
+            @NotNull Map<String, ?> data2,
+            String formatterName) throws Exception {
         Set<String> keys = new HashSet<>();
         keys.addAll(data1.keySet());
         keys.addAll(data2.keySet());
@@ -43,7 +43,7 @@ public class Differ {
             diff.add(newRecord);
         });
 
-        return diff;
+        return Formatters.getFormatter(formatterName).format(diff);
     }
 
     private static Object getNullAsString(Object value) {

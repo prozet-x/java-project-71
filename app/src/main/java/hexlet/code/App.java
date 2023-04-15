@@ -1,13 +1,10 @@
 package hexlet.code;
 
-import hexlet.code.formatters.Formatter;
-import hexlet.code.formatters.Formatters;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
@@ -34,9 +31,8 @@ public class App implements Callable<Integer> {
     public Integer call() throws Exception {
         Map<String, ?> data1 = Parser.parseFile(filePath1);
         Map<String, ?> data2 = Parser.parseFile(filePath2);
-        List<Map<String, ?>> diff = Differ.generate(data1, data2);
-        Formatter formatter = Formatters.getFormatter(format);
-        System.out.println(formatter.format(diff));
+        String diff = Differ.generate(data1, data2, format);
+        System.out.println(diff);
         return 0;
     }
 
