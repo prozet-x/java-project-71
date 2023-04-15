@@ -17,9 +17,9 @@ public class Differ {
         keys.addAll(data1.keySet());
         keys.addAll(data2.keySet());
 
-        var sortedKeys = keys.stream().sorted().toList();
-
         List<Map<String, ?>> diff = new ArrayList<>();
+
+        var sortedKeys = keys.stream().sorted().toList();
         sortedKeys.forEach(key -> {
             Map<String, ?> newRecord;
             if (!data1.containsKey(key)) {
