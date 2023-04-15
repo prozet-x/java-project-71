@@ -35,20 +35,15 @@ class DifferTest {
     }
 
     private void differTest(Path path1, Path path2, String formatName) throws Exception {
-        final var f1f2ResPath = Path.of(String.format("src/test/resources/f1f2%shRes.txt", formatName));
-        final var f2f1ResPath = Path.of(String.format("src/test/resources/f2f1%shRes.txt", formatName));
-        final var f1f1ResPath = Path.of(String.format("src/test/resources/f1f1%shRes.txt", formatName));
+        final var f1f2ResPath = Path.of(String.format("src/test/resources/f1f2%sRes.txt", formatName));
+        final var f2f1ResPath = Path.of(String.format("src/test/resources/f2f1%sRes.txt", formatName));
+        final var f1f1ResPath = Path.of(String.format("src/test/resources/f1f1%sRes.txt", formatName));
 
-        try {
-            data1 = Parser.parseFile(path1);
-            data2 = Parser.parseFile(path2);
-            f1f2Res = Files.readString(f1f2ResPath);
-            f2f1Res = Files.readString(f2f1ResPath);
-            f1f1Res = Files.readString(f1f1ResPath);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            return;
-        }
+        data1 = Parser.parseFile(path1);
+        data2 = Parser.parseFile(path2);
+        f1f2Res = Files.readString(f1f2ResPath);
+        f2f1Res = Files.readString(f2f1ResPath);
+        f1f1Res = Files.readString(f1f1ResPath);
 
         String diff;
 
