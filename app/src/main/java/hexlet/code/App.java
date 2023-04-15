@@ -34,7 +34,7 @@ public class App implements Callable<Integer> {
     public Integer call() throws Exception {
         Map<String, ?> data1 = Parser.parseFile(filePath1);
         Map<String, ?> data2 = Parser.parseFile(filePath2);
-        List<Map<String, String>> diff = Differ.generate(data1, data2);
+        List<Map<String, ?>> diff = Differ.generate(data1, data2);
         Formatter formatter = Formatters.getFormatter(format);
         System.out.println(formatter.format(diff));
         return 0;

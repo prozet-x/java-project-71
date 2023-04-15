@@ -55,7 +55,7 @@ class DifferTest {
             return;
         }
 
-        List<Map<String, String>> diff;
+        List<Map<String, ?>> diff;
 
         diff = Differ.generate(data1, data2);
         assertEquals(f1f2diffData, Formatters.getFormatter("stylish").format(diff));
