@@ -25,6 +25,6 @@ public class Stylish implements Formatter {
     }
 
     private static String getAsString(Object value) {
-        return value == null ? "null" : value.toString();
+        return String.valueOf(value);
     }
 }

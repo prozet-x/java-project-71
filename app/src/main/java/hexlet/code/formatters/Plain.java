@@ -30,11 +30,9 @@ public class Plain implements Formatter {
     private static String getFormattedValue(Object value) {
         if (value instanceof List || value instanceof Map) {
             return "[complex value]";
-        } else if (value.equals("null")) {
-            return value.toString();
         } else if (value instanceof String) {
             return String.format("'%s'", value.toString());
         }
-        return  value.toString();
+        return  String.valueOf(value);
     }
 }
