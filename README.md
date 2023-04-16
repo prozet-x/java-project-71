@@ -11,3 +11,5 @@
 [![asciicast](https://asciinema.org/a/WcU6ftsMgSJeSSnPP2SC1uomu.svg)](https://asciinema.org/a/WcU6ftsMgSJeSSnPP2SC1uomu)
 ### Plain output:
 [![asciicast](https://asciinema.org/a/TNVx8nk0WQOXLGhTcMRhUawEm.svg)](https://asciinema.org/a/TNVx8nk0WQOXLGhTcMRhUawEm)
+### Json output:
+[![asciicast](https://asciinema.org/a/M3hrGk8mS2xI6wXmgrHSFZceZ.svg)](https://asciinema.org/a/M3hrGk8mS2xI6wXmgrHSFZceZ)
