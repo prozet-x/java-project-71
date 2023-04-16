@@ -5,7 +5,8 @@ import java.util.Map;
 public class Formatters {
     private static Map<String, Formatter> map = Map.of(
             "stylish", new Stylish(),
-            "plain", new Plain()
+            "plain", new Plain(),
+            "json", new Json()
             );
     public static Formatter getFormatter(String formatterName) throws Exception {
         if (map.containsKey(formatterName)) {

@@ -34,6 +34,13 @@ class DifferTest {
         differTest(fix1Path, fix2Path, "plain");
     }
 
+    @Test
+    public void testJsonYamlJson() throws Exception {
+        var fix1Path = Path.of("src/test/resources/fix1.json");
+        var fix2Path = Path.of("src/test/resources/fix2.yml");
+        differTest(fix1Path, fix2Path, "json");
+    }
+
     private void differTest(Path path1, Path path2, String formatName) throws Exception {
         final var f1f2ResPath = Path.of(String.format("src/test/resources/f1f2%sRes.txt", formatName));
         final var f2f1ResPath = Path.of(String.format("src/test/resources/f2f1%sRes.txt", formatName));
