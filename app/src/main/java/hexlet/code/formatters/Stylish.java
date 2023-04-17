@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Stylish implements Formatter {
+public final class Stylish implements Formatter {
     public String format(List<Map<String, ?>> data) {
         List<String> rows = new ArrayList<>();
         rows.add("{");

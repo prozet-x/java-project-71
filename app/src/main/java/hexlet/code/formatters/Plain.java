@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Plain implements Formatter {
+public final class Plain implements Formatter {
     public String format(List<Map<String, ?>> data) {
         List<String> rows = new ArrayList<>();
         data.forEach(str -> {
