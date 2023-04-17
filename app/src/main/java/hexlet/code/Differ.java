@@ -1,8 +1,7 @@
 package hexlet.code;
 
 import hexlet.code.formatters.Formatters;
-import org.jetbrains.annotations.NotNull;
-
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
@@ -11,10 +10,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Differ {
-    public static String generate(
-            @NotNull Map<String, ?> data1,
-            @NotNull Map<String, ?> data2,
-            String formatterName) throws Exception {
+    public static String generate(String filePath1, String filePath2, String formatterName) throws Exception {
+        Map<String, ?> data1 = Parser.parseFile(Path.of(filePath1));
+        Map<String, ?> data2 = Parser.parseFile(Path.of(filePath2));
 
         Set<String> keys = new HashSet<>();
         keys.addAll(data1.keySet());

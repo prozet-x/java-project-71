@@ -15,52 +15,42 @@ class DifferTest {
 
     @Test
     public void testJSONStylish() throws Exception {
-        var fix1Path = Path.of("src/test/resources/fix1.json");
-        var fix2Path = Path.of("src/test/resources/fix2.json");
-        differTest(fix1Path, fix2Path, "stylish");
+        differTest("src/test/resources/fix1.json", "src/test/resources/fix2.json", "stylish");
     }
 
     @Test
     public void testYAMLStylish() throws Exception {
-        var fix1Path = Path.of("src/test/resources/fix1.yml");
-        var fix2Path = Path.of("src/test/resources/fix2.yml");
-        differTest(fix1Path, fix2Path, "stylish");
+        differTest("src/test/resources/fix1.yml", "src/test/resources/fix2.yml", "stylish");
     }
 
     @Test
     public void testJsonYamlPlain() throws Exception {
-        var fix1Path = Path.of("src/test/resources/fix1.json");
-        var fix2Path = Path.of("src/test/resources/fix2.yml");
-        differTest(fix1Path, fix2Path, "plain");
+        differTest("src/test/resources/fix1.json", "src/test/resources/fix2.yml", "plain");
     }
 
     @Test
     public void testJsonYamlJson() throws Exception {
-        var fix1Path = Path.of("src/test/resources/fix1.json");
-        var fix2Path = Path.of("src/test/resources/fix2.yml");
-        differTest(fix1Path, fix2Path, "json");
+        differTest("src/test/resources/fix1.json", "src/test/resources/fix2.yml", "json");
     }
 
-    private void differTest(Path path1, Path path2, String formatName) throws Exception {
+    private void differTest(String filePath1, String filePath2, String formatName) throws Exception {
         final var f1f2ResPath = Path.of(String.format("src/test/resources/f1f2%sRes.txt", formatName));
         final var f2f1ResPath = Path.of(String.format("src/test/resources/f2f1%sRes.txt", formatName));
         final var f1f1ResPath = Path.of(String.format("src/test/resources/f1f1%sRes.txt", formatName));
 
-        data1 = Parser.parseFile(path1);
-        data2 = Parser.parseFile(path2);
         f1f2Res = Files.readString(f1f2ResPath);
         f2f1Res = Files.readString(f2f1ResPath);
         f1f1Res = Files.readString(f1f1ResPath);
 
         String diff;
 
-        diff = Differ.generate(data1, data2, formatName);
+        diff = Differ.generate(filePath1, filePath2, formatName);
         assertEquals(f1f2Res, diff);
 
-        diff = Differ.generate(data2, data1, formatName);
+        diff = Differ.generate(filePath2, filePath1, formatName);
         assertEquals(f2f1Res, diff);
 
-        diff = Differ.generate(data1, data1, formatName);
+        diff = Differ.generate(filePath1, filePath1, formatName);
         assertEquals(f1f1Res, diff);
     }
 }

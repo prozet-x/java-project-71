@@ -4,8 +4,6 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
-import java.nio.file.Path;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 @Command(
@@ -15,10 +13,10 @@ import java.util.concurrent.Callable;
         mixinStandardHelpOptions = true)
 public class App implements Callable<Integer> {
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    Path filePath1;
+    String filePath1;
 
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    Path filePath2;
+    String filePath2;
 
     @Option(
             names = {"-f", "--format"},
@@ -29,9 +27,7 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        Map<String, ?> data1 = Parser.parseFile(filePath1);
-        Map<String, ?> data2 = Parser.parseFile(filePath2);
-        String diff = Differ.generate(data1, data2, format);
+        String diff = Differ.generate(filePath1, filePath2, format);
         System.out.println(diff);
         return 0;
     }
