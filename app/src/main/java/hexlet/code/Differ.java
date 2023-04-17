@@ -11,6 +11,16 @@ import java.util.ArrayList;
 
 public class Differ {
     public static String generate(String filePath1, String filePath2, String formatterName) throws Exception {
+        List<Map<String, ?>> diff = getDiff(filePath1, filePath2);
+        return Formatters.getFormatter(formatterName).format(diff);
+    }
+
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        List<Map<String, ?>> diff = getDiff(filePath1, filePath2);
+        return Formatters.getFormatter("stylish").format(diff);
+    }
+
+    private static List<Map<String, ?>> getDiff(String filePath1, String filePath2) throws Exception {
         Map<String, ?> data1 = Parser.parseFile(Path.of(filePath1));
         Map<String, ?> data2 = Parser.parseFile(Path.of(filePath2));
 
@@ -39,8 +49,7 @@ public class Differ {
 
             diff.add(newRecord);
         });
-
-        return Formatters.getFormatter(formatterName).format(diff);
+        return diff;
     }
 
     private static Map<String, ?> getNewDiffRecord(String status, Object key, Object value) {
